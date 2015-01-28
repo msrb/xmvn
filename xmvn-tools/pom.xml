@@ -56,10 +56,5 @@
       <artifactId>sisu-guice</artifactId>
       <classifier>no_aop</classifier>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <scope>runtime</scope>
-    </dependency>
   </dependencies>
 </project>
