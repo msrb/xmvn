@@ -91,12 +91,18 @@ public class ArtifactTypeRegistry
     }
 
     public Artifact createTypedArtifact( String groupId, String artifactId, String type, String customClassifier,
-                                         String version )
+            String version )
+    {
+        return createTypedArtifact(groupId, artifactId, type, customClassifier, version, null);
+    }
+
+    public Artifact createTypedArtifact( String groupId, String artifactId, String type, String customClassifier,
+                                         String version, Boolean optional )
     {
         if ( type == null || EXTENSIONS.get( type ) == null )
-            return new DefaultArtifact( groupId, artifactId, type, customClassifier, version );
+            return new DefaultArtifact( groupId, artifactId, type, customClassifier, version, null, optional );
 
         String classifier = StringUtils.isNotEmpty( customClassifier ) ? customClassifier : CLASSIFIERS.get( type );
-        return new DefaultArtifact( groupId, artifactId, EXTENSIONS.get( type ), classifier, version );
+        return new DefaultArtifact( groupId, artifactId, EXTENSIONS.get( type ), classifier, version, null, optional );
     }
 }

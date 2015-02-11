@@ -48,6 +48,7 @@ class RuntimeDependencyVisitor
                                                                                                      dependency.getArtifactId(),
                                                                                                      dependency.getType(),
                                                                                                      dependency.getClassifier(),
-                                                                                                     dependency.getVersion() ) );
+                                                                                                     dependency.getVersion(),
+                                                                                                     dependency.getOptional() != null ? dependency.isOptional() : null ) );
     }
 }

@@ -85,6 +85,7 @@ public class DefaultDeployer
                 dependency.setArtifactId( dependencyArtifact.getArtifactId() );
                 dependency.setExtension( dependencyArtifact.getExtension() );
                 dependency.setClassifier( dependencyArtifact.getClassifier() );
+                dependency.setOptional( dependencyArtifact.getOptional() );
                 dependency.setRequestedVersion( dependencyArtifact.getVersion() );
 
                 for ( Artifact exclusionArtifact : entry.getValue() )

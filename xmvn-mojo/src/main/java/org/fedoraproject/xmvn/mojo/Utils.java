@@ -75,7 +75,8 @@ class Utils
         }
 
         return registry.createTypedArtifact( dependency.getGroupId(), dependency.getArtifactId(), dependency.getType(),
-                                             dependency.getClassifier(), dependency.getVersion() );
+                                             dependency.getClassifier(), dependency.getVersion(),
+                                             dependency.getOptional() != null ? dependency.isOptional() : null );
     }
 
     private static void writeModel( Model model, Path path )

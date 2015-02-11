@@ -166,6 +166,15 @@
         </field>
 
         <field>
+          <name>optional</name>
+          <version>2.3.0+</version>
+          <description>
+            Indication whether the dependency artifact is optional or not.
+          </description>
+          <type>Boolean</type>
+        </field>
+
+        <field>
           <name>requestedVersion</name>
           <version>2.0.0+</version>
           <description>Version of the dependency artifact as defined in the main artifact descriptor. This may be a version range as supported by Aether.</description>

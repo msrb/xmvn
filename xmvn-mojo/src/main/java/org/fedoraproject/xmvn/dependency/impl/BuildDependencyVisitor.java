@@ -80,7 +80,8 @@ class BuildDependencyVisitor
                                                                                                      dependency.getArtifactId(),
                                                                                                      dependency.getType(),
                                                                                                      dependency.getClassifier(),
-                                                                                                     dependency.getVersion() ) );
+                                                                                                     dependency.getVersion(),
+                                                                                                     dependency.getOptional() != null ? dependency.isOptional() : null ) );
     }
 
     @Override
@@ -118,6 +119,7 @@ class BuildDependencyVisitor
                                                                                                      dependency.getArtifactId(),
                                                                                                      dependency.getType(),
                                                                                                      dependency.getClassifier(),
-                                                                                                     dependency.getVersion() ) );
+                                                                                                     dependency.getVersion(),
+                                                                                                     dependency.getOptional() != null ? dependency.isOptional() : null ) );
     }
 }

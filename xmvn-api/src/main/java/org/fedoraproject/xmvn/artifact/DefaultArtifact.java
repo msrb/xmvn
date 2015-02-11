@@ -35,6 +35,8 @@ public final class DefaultArtifact
 
     private final Path path;
 
+    private final Boolean optional;
+
     public DefaultArtifact( String coords )
     {
         String s = coords;
@@ -57,6 +59,7 @@ public final class DefaultArtifact
         classifier = n < 4 ? "" : a[3];
         version = n < 2 || a[n].isEmpty() ? DEFAULT_VERSION : a[n];
         path = null;
+        optional = null;
     }
 
     public DefaultArtifact( String groupId, String artifactId )
@@ -82,6 +85,12 @@ public final class DefaultArtifact
     public DefaultArtifact( String groupId, String artifactId, String extension, String classifier, String version,
                             Path path )
     {
+        this( groupId, artifactId, extension, classifier, version, path, null );
+    }
+
+    public DefaultArtifact( String groupId, String artifactId, String extension, String classifier, String version,
+                            Path path, Boolean optional )
+    {
         if ( groupId == null || groupId.isEmpty() )
             throw new IllegalArgumentException( "groupId must be specified" );
         if ( artifactId == null || artifactId.isEmpty() )
@@ -93,6 +102,7 @@ public final class DefaultArtifact
         this.classifier = classifier == null ? "" : classifier;
         this.version = version == null || version.isEmpty() ? DEFAULT_VERSION : version;
         this.path = path;
+        this.optional = optional;
     }
 
     @Override
@@ -132,6 +142,12 @@ public final class DefaultArtifact
     }
 
     @Override
+    public Boolean getOptional()
+    {
+        return optional;
+    }
+
+    @Override
     public Artifact setVersion( String version )
     {
         return new DefaultArtifact( groupId, artifactId, extension, classifier, version, path );
@@ -166,7 +182,8 @@ public final class DefaultArtifact
 
         return groupId.equals( x.getGroupId() ) && artifactId.equals( x.getArtifactId() )
             && extension.equals( x.getExtension() ) && classifier.equals( x.getClassifier() )
-            && version.equals( x.getVersion() ) && ( path == null ? x.getPath() == null : path.equals( x.getPath() ) );
+            && version.equals( x.getVersion() ) && ( path == null ? x.getPath() == null : path.equals( x.getPath() ) )
+            && ( optional == null ? x.getOptional() == null : optional.equals( x.getOptional() ) );
     }
 
     @Override

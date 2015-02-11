@@ -82,6 +82,15 @@ public interface Artifact
     Path getPath();
 
     /**
+     * Get indication whether this artifact is optional or not.
+     *
+     * @return {@code true} if this artifact is optional,
+     *         {@code false} if this artifact is not optional,
+     *         {@code null} if information about optionality is not available.
+     */
+    Boolean getOptional();
+
+    /**
      * Set artifact version.
      * <p>
      * Since artifacts are immutable, this method returns a new object and leaves the original unmodified.
