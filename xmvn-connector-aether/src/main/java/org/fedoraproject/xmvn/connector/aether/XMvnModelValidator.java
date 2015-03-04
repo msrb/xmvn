@@ -74,20 +74,22 @@ public class XMvnModelValidator
     private void customizeModel( Model model )
     {
         BuildSettings settings = configurator.getConfiguration().getBuildSettings();
-        Build build = model.getBuild() != null ? model.getBuild() : null;
         List<Dependency> dependencies = model.getDependencies();
-        List<Extension> extensions = build.getExtensions();
-        List<Plugin> plugins = build.getPlugins();
 
         if ( settings.isSkipTests() )
             dependencies.removeIf( d -> StringUtils.equals( d.getScope(), "test" ) );
 
         dependencies.forEach( d -> d.setVersion( replaceVersion( d.getGroupId(), d.getArtifactId(), d.getVersion() ) ) );
-        extensions.forEach( e -> e.setVersion( replaceVersion( e.getGroupId(), e.getArtifactId(), e.getVersion() ) ) );
-        plugins.forEach( p -> p.setVersion( replaceVersion( p.getGroupId(), p.getArtifactId(), p.getVersion() ) ) );
 
-        plugins.stream().filter( p -> p.getGroupId().equals( "org.apache.maven.plugins" )
-                                     && p.getArtifactId().equals( "maven-compiler-plugin" ) ).forEach( p -> configureCompiler( p ) );
+        Build build = model.getBuild();
+        if ( build != null ) {
+            List<Extension> extensions = build.getExtensions();
+            List<Plugin> plugins = build.getPlugins();
+            extensions.forEach( e -> e.setVersion( replaceVersion( e.getGroupId(), e.getArtifactId(), e.getVersion() ) ) );
+            plugins.forEach( p -> p.setVersion( replaceVersion( p.getGroupId(), p.getArtifactId(), p.getVersion() ) ) );
+            plugins.stream().filter( p -> p.getGroupId().equals( "org.apache.maven.plugins" )
+                                         && p.getArtifactId().equals( "maven-compiler-plugin" ) ).forEach( p -> configureCompiler( p ) );
+        }
     }
 
     private String replaceVersion( String groupId, String artifactId, String version )
